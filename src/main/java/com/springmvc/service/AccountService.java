@@ -1,12 +1,15 @@
 package com.springmvc.service;
 
 import com.springmvc.model.Account;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/31.
  */
+
 public interface AccountService {
     Account findById(long id);
 

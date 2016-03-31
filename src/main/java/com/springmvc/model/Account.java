@@ -80,7 +80,7 @@ public class Account {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof User))
+        if (!(obj instanceof Account))
             return false;
         Account other = (Account) obj;
         if (id != other.id)
@@ -90,7 +90,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", address=" + address
+        return "Account [id=" + id + ", username=" + username + ", address=" + address
                 + ", email=" + email + "]";
     }
 }
