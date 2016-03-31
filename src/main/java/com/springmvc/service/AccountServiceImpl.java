@@ -17,7 +17,6 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
     private AccountDAO accountDAO;
 
-
     public Account findById(long id) {
         return accountDAO.findOne(id);
     }
