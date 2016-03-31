@@ -70,24 +70,21 @@
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
     <!-- production环境 -->
-    <!--<beans profile="production">
-        <context:property-placeholder ignore-resource-not-found="true"
-                                      location="classpath*:/application.properties"/>
-    </beans>-->
+    <beans profile="production">
+        <!--<context:property-placeholder ignore-resource-not-found="true"
+                                      location="classpath*:/application.properties"/>-->
+    </beans>
 
-
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://10.24.13.155:3306/ecloud?useUnicode=true&amp;characterEncoding=UTF8"/>
-        <property name="username" value="root"></property>
-        <property name="password" value="1qaz2wsx?"></property>
-    </bean>
     <!-- local development环境 -->
-    <!--<beans profile="development">
-        <context:property-placeholder ignore-resource-not-found="true"
-                                      location="classpath*:/application.properties,
-          			  classpath*:/application.development.properties"/>
-
-    </beans>-->
+    <beans profile="development">
+        <context:property-placeholder ignore-resource-not-found="false"
+                                      location="classpath*:/application.development.properties"/>
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+            <property name="url" value="${mysql.url}"/>
+            <property name="username" value="${mysql.username}"></property>
+            <property name="password" value="${mysql.password}"></property>
+        </bean>
+    </beans>
 
 </beans>
