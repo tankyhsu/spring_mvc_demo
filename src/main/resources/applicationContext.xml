@@ -44,7 +44,7 @@
 
     <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="database" value="MYSQL"/>
-        <property name="showSql" value="true"/>
+        <property name="showSql" value="false"/>
         <property name="generateDdl" value="true"/>
     </bean>
 
@@ -69,21 +69,28 @@
     <!-- hibernate validator -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
+    <!--通过profile区分不同环境下的配置，切换环境时，在web.xml中修改默认profile即可-->
     <!-- production环境 -->
     <beans profile="production">
-        <!--<context:property-placeholder ignore-resource-not-found="true"
-                                      location="classpath*:/application.properties"/>-->
+        <context:property-placeholder ignore-resource-not-found="true"
+                                      location="classpath*:/application.production.properties"/>
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+            <property name="url" value="${pro.mysql.url}"/>
+            <property name="username" value="${pro.mysql.username}"></property>
+            <property name="password" value="${pro.mysql.password}"></property>
+        </bean>
     </beans>
 
     <!-- local development环境 -->
     <beans profile="development">
-        <context:property-placeholder ignore-resource-not-found="false"
+        <context:property-placeholder ignore-resource-not-found="true"
                                       location="classpath*:/application.development.properties"/>
         <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
             <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-            <property name="url" value="${mysql.url}"/>
-            <property name="username" value="${mysql.username}"></property>
-            <property name="password" value="${mysql.password}"></property>
+            <property name="url" value="${dev.mysql.url}"/>
+            <property name="username" value="${dev.mysql.username}"></property>
+            <property name="password" value="${dev.mysql.password}"></property>
         </bean>
     </beans>
 
